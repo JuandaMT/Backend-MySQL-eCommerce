@@ -1,4 +1,3 @@
 # Table of contents
 
-* [README](README.md)
-* [Instrucciones](instrucciones.md)
+* [Guía de desarrollo](README.md)
