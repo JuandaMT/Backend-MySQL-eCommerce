@@ -1,13 +1,17 @@
-const { Product, Category, Sequelize } = require('../models/index.js');
+const { Product, Category, Sequelize } = require("../models/index.js");
 const { Op } = Sequelize;
 const ProductController = {
-    //CREAR UN PRODUCTO
-    create(req, res){
-        Product.create(req.body)
-        .then(Product => res.status(201).send({message: 'Product created successfully', Product}))
-        .catch(console.error)
-    },
-    //ACTUALIZAR UN PRODUCTO
+  //CREAR UN PRODUCTO
+  create(req, res) {
+    Product.create(req.body)
+      .then((Product) =>
+        res
+          .status(201)
+          .send({ message: "Product created successfully", Product })
+      )
+      .catch(console.error);
+  },
+  //ACTUALIZAR UN PRODUCTO
   update(req, res) {
     Product.update(req.body, {
       where: {
@@ -83,5 +87,44 @@ const ProductController = {
         });
       });
   },
-}
-module.exports = ProductController
+  /* PRODUCTOS POR PRECIO */
+  getByPrice(req, res) {
+    Product.findOne({
+      where: {
+        price: {
+          [Op.like]: req.params.price,
+        },
+      },
+      include: [Category],
+    })
+
+      .then((Product) => res.send(Product))
+
+      .catch((err) => {
+        console.log(err);
+
+        res.status(500).send({
+          message: "Cannot found the products",
+        });
+      });
+  },
+  /* PRODUCTOS ORDENADOS POR PRECIO */
+  orderByPrice(req, res) {
+    Product.findAll({
+      
+      order: [["price", "DESC"]],
+      include: [Category],
+    })
+
+      .then((Product) => res.send(Product))
+
+      .catch((err) => {
+        console.log(err);
+
+        res.status(500).send({
+          message: "Cannot found the products",
+        });
+      });
+  },
+};
+module.exports = ProductController;
