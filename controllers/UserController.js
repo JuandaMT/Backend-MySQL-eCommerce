@@ -4,14 +4,17 @@ const jwt = require("jsonwebtoken");
 const { jwt_secret } = require("../config/config.json")["development"];
 const { Op } = Sequelize;
 const UserController = {
-  create(req, res) {
+  create(req, res, next) {
     req.body.role = "user";
     const password = bcrypt.hashSync(req.body.password, 10);
     User.create({ ...req.body, password: password })
       .then((user) =>
         res.status(201).send({ message: "User created successfully", user })
       )
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        next(err);
+      });
   },
   /* LOGIN */
   login(req, res) {
@@ -44,13 +47,13 @@ const UserController = {
       },
     })
       .then(() => {
-        res.send({ message: "Desconectado con éxito" });
+        res.send({ message: "Successfully connected" });
       })
       .catch((error) => {
         console.log(error);
         res
           .status(500)
-          .send({ message: "Hubo un problema al tratar de desconectarte" });
+          .send({ message: "There was a problem trying to disconnect you" });
       });
   },
 };

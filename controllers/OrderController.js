@@ -3,7 +3,7 @@ const { Order, Product } = require('../models/index.js');
 const OrderController = {
     getAll(req, res) {
         Order.findAll({
-          include: [Product],
+          include: [{Product , through: { attributes: [] } }],
         })
     
           .then((Order) => res.send(Order))

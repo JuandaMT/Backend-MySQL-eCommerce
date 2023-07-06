@@ -21,7 +21,7 @@ const authentication = async (req, res, next) => {
     });
 
     if (!tokenFound) {
-      return res.status(401).send({ message: "No estas autorizado" });
+      return res.status(401).send({ message: "You are not authorised" });
     }
 
     req.user = user;
@@ -32,7 +32,7 @@ const authentication = async (req, res, next) => {
 
     res
       .status(500)
-      .send({ error, message: "Ha habido un problema con el token" });
+      .send({ error, message: "There was a problem with the token" });
   }
 };
 
