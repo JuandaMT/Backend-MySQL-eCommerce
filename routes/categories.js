@@ -10,4 +10,5 @@ router.get('/', CategoryController.getAll)
 router.get('/id/:id', CategoryController.getById)
 router.get('/name/:name', CategoryController.getOneByName)
 router.delete('/id/:id', CategoryController.delete)
+
 module.exports = router;

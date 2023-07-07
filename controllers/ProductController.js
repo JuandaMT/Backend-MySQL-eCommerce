@@ -111,13 +111,10 @@ const ProductController = {
   /* PRODUCTOS ORDENADOS POR PRECIO */
   orderByPrice(req, res) {
     Product.findAll({
-      
       order: [["price", "DESC"]],
       include: [Category],
     })
-
       .then((Product) => res.send(Product))
-
       .catch((err) => {
         console.log(err);
 

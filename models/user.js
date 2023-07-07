@@ -31,11 +31,11 @@ module.exports = (sequelize, DataTypes) => {
 
         validate: {
           notNull: {
-            msg: "Por favor introduce tu correo",
+            msg: "Please insert your email",
           },
 
           isEmail: {
-            msg: "Por favor introduce un correo valido",
+            msg: "Please insert a valid email",
           },
         },
       },

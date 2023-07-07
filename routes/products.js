@@ -13,6 +13,9 @@ router.get('/name/:name', ProductController.getOneByName)
 router.get('/price/:price', ProductController.getByPrice)
 router.get('/orderedbyprice', ProductController.orderByPrice)
 
+
+
+
 router.delete('/id/:id',authentication, ProductController.delete)
 
 module.exports = router;
