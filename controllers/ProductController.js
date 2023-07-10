@@ -1,17 +1,15 @@
 const { Product, Category, Sequelize } = require("../models/index.js");
 const { Op } = Sequelize;
 const ProductController = {
-  //CREAR UN PRODUCTO
   create(req, res) {
     Product.create(req.body)
       .then((Product) =>
         res
           .status(201)
-          .send({ message: "Product created successfully", Product })
+          .send({ message: "Product successfully created", Product })
       )
       .catch(console.error);
   },
-  //ACTUALIZAR UN PRODUCTO
   update(req, res) {
     Product.update(req.body, {
       where: {
@@ -25,7 +23,6 @@ const ProductController = {
         res.status(500).send("Product wont updated");
       });
   },
-  /* ELIMINAR UN PRODUCTO */
   delete(req, res) {
     Product.destroy({
       where: {
@@ -39,7 +36,6 @@ const ProductController = {
         res.send("Product wont deleted");
       });
   },
-  /* PRODUCTOS + CATEGORIAS */
   getAll(req, res) {
     Product.findAll({
       include: [Category],
@@ -55,7 +51,6 @@ const ProductController = {
         });
       });
   },
-  /* TRAER PRODUCTO POR ID */
   getById(req, res) {
     Product.findByPk(req.params.id, {
       include: [Category],
@@ -68,7 +63,6 @@ const ProductController = {
         });
       });
   },
-  /* TRAER PRODUCTO POR NOMBRE */
   getOneByName(req, res) {
     Product.findOne({
       where: {
@@ -87,7 +81,6 @@ const ProductController = {
         });
       });
   },
-  /* PRODUCTOS POR PRECIO */
   getByPrice(req, res) {
     Product.findOne({
       where: {
@@ -108,7 +101,6 @@ const ProductController = {
         });
       });
   },
-  /* PRODUCTOS ORDENADOS POR PRECIO */
   orderByPrice(req, res) {
     Product.findAll({
       order: [["price", "DESC"]],

@@ -16,7 +16,6 @@ const UserController = {
         next(err);
       });
   },
-  /* LOGIN */
   login(req, res) {
     User.findOne({
       where: {
@@ -26,9 +25,7 @@ const UserController = {
       if (!user) {
         return res.status(400).send({ message: "User or password incorrect" });
       }
-
       const isMatch = bcrypt.compareSync(req.body.password, user.password);
-
       if (!isMatch) {
         return res.status(400).send({ message: "User or password incorrect" });
       }
@@ -56,7 +53,6 @@ const UserController = {
           .send({ message: "There was a problem trying to disconnect you" });
       });
   },
-  /* Endpoint que nos traiga la información del usuario conectado junto a los pedidos que tiene y los productos que contiene cada pedido */
   getTheOrderWithTheProducts(req, res) {
     User.findByPk(req.user.id, {
       include: {

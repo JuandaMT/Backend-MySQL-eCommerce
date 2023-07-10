@@ -3,16 +3,14 @@ const { Category, Product, Sequelize } = require("../models/index.js");
 const { Op } = Sequelize;
 const CategoryController = {
   create(req, res) {
-    //CREAR UNA CATEGORÍA
     Category.create(req.body)
       .then((Category) =>
         res
           .status(201)
-          .send({ message: "Category created successfully", Category })
+          .send({ message: "Category successfully created", Category })
       )
       .catch(console.error);
   },
-  //ACTUALIZAR UNA CATEGORIA
   update(req, res) {
     Category.update(req.body, {
       where: {
@@ -26,7 +24,6 @@ const CategoryController = {
         res.status(500).send("Category wont updated");
       });
   },
-  /* ELIMINAR UNA CATEGORIA */
   delete(req, res) {
     Category.destroy({
       where: {
@@ -40,7 +37,6 @@ const CategoryController = {
         res.send("Category wont deleted");
       });
   },
-  /* CATEGORIAS + PRODUCTOS */
   getAll(req, res) {
     Category.findAll({
       include: [Product],
@@ -56,7 +52,6 @@ const CategoryController = {
         });
       });
   },
-  /* TRAER CATEGORIA POR ID */
   getById(req, res) {
     Category.findByPk(req.params.id, {
       include: [Product],
@@ -69,7 +64,6 @@ const CategoryController = {
         });
       });
   },
-  /* TRAER CATEGORIA POR NOMBRE */
   getOneByName(req, res) {
     Category.findOne({
       where: {
