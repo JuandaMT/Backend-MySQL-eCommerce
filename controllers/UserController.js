@@ -1,4 +1,4 @@
-const { User, Post, Token, Sequelize,Order } = require("../models/index.js");
+const { User, Product, Token, Sequelize, Order } = require("../models/index.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { jwt_secret } = require("../config/config.json")["development"];
@@ -57,18 +57,15 @@ const UserController = {
       });
   },
   /* Endpoint que nos traiga la información del usuario conectado junto a los pedidos que tiene y los productos que contiene cada pedido */
-  ordersProducts(req, res) {
-    User.findByPk(req.user.id ,{
+  getTheOrderWithTheProducts(req, res) {
+    User.findByPk(req.user.id, {
       include: {
-        Order,
-        include: {
-          Product
-        }
-      }
+        model: Order,
+        include: [Product],
+      },
     })
       .then((user) => res.send(user))
       .catch((err) => {
-        console.log("eeee")
         console.log(err);
         res.status(500).send({
           message: "Cannot found the products",
