@@ -12,6 +12,9 @@ Este repositorio contiene el código fuente y la documentación del proyecto de 
 * Uso de al menos una relación Many-to-Many y una relación One-to-Many en el diseño de la base de datos.
 * Utilización de seeders para la creación de datos iniciales en la base de datos.
 
+## Diagrama de tablas
+![Diagrama Workbench](https://github.com/JuandaMT/Proyecto-Backend/assets/130000511/8871727e-8caf-4d2b-b768-a806a6823675)
+
 ## tecnologías utilizadas
 El proyecto utiliza las siguientes tecnologías:
 
