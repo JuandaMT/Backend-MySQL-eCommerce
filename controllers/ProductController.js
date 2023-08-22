@@ -1,14 +1,14 @@
 const { Product, Category, Sequelize } = require("../models/index.js");
 const { Op } = Sequelize;
 const ProductController = {
-  create(req, res) {
+  create(req, res, next) {
     Product.create(req.body)
       .then((Product) =>
         res
           .status(201)
           .send({ message: "Product successfully created", Product })
       )
-      .catch(console.error);
+      .catch(error=>next(error));
   },
   update(req, res) {
     Product.update(req.body, {
